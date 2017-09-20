@@ -48,7 +48,7 @@ module.exports = class Channel {
 	    return;
         }
         this.wstream.end();
-        this.wstram = null;
+        this.wstream = null;
     }
 
     // Returns true if the channel has been closed

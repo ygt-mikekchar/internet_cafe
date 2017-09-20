@@ -29,13 +29,17 @@ const timeout = (minutes) => {
 
 const online = channel => async (tourist) => {
     let current = tourist;
-    while(!channel.is_closed()) {
+    while(current) {
 	let time = random_int(min_time, max_time);
 	console.log('Tourist ' + current + ' is online.');
 	await timeout(time);
 	console.log('Tourist ' + current + ' is done, having spent ' +
 		    time + ' minutes online.');
-	current = await channel.read();
+	try {
+	    current = await channel.read();
+	} catch(_) {
+	    current = null;
+	}
     }
     return Promise.resolve;
 };
@@ -54,6 +58,7 @@ const computers = async(channel, tourists) => {
 const queue = async (channel, tourists) => {
     await Promise.all(tourists.map(waiting(channel)));
     channel.close();
+    console.log("channel is closed");
 };
 
 const [head, tail] = take(range(num_tourists), num_computers);
