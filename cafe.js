@@ -58,7 +58,6 @@ const computers = async(channel, tourists) => {
 const queue = async (channel, tourists) => {
     await Promise.all(tourists.map(waiting(channel)));
     channel.close();
-    console.log("channel is closed");
 };
 
 const [head, tail] = take(range(num_tourists), num_computers);
