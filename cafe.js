@@ -41,13 +41,11 @@ const online = channel => async (tourist) => {
 	    current = null;
 	}
     }
-    return Promise.resolve;
 };
 
 const waiting = channel => async (tourist) => {
     console.log('Tourist ' + tourist + ' is waiting for turn.');
     await channel.write(tourist.toString());
-    return Promise.resolve;
 };
 
 const computers = async(channel, tourists) => {
